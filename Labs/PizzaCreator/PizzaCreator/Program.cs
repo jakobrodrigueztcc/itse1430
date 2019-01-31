@@ -12,10 +12,11 @@ namespace PizzaCreator
 {
     class Program
     {
+        
         static void Main( string[] args )
         {
             int option;
-            decimal cart;
+            decimal totalPrice = 0;
             Console.WriteLine("Welcome to the Pizza Creator.");
             do
             {
@@ -23,18 +24,18 @@ namespace PizzaCreator
                 option = SelectOption();
                 switch (option)
                 {
-                    case 1: NewOrder(); break;
-                    case 2: ModifyOrder(); break;
-                    case 3: DisplayOrder(); break;
+                    case 1: totalPrice = NewOrder(totalPrice); break;
+                    case 2: totalPrice = ModifyOrder(totalPrice); break;
+                    case 3: totalPrice = DisplayOrder(totalPrice); break;
                     case 4: 
                     default: Console.WriteLine("Good bye.");
                     System.Threading.Thread.Sleep(1000); // Wait for 1 second before exiting
                     break;
                 }
-                Console.WriteLine
+
+                Console.WriteLine();
             } while (option != 4);
         }
-
 
         private static void DisplayMenu()
         {
@@ -43,8 +44,8 @@ namespace PizzaCreator
                                 "2 Modify Order\n" +
                                 "3 Display Order\n" +
                                 "4 Quit");
-
         }
+
         private static int SelectOption()
         {
             var input = Console.ReadLine();
@@ -52,21 +53,36 @@ namespace PizzaCreator
             // Check the input. Keep prompting until the user enters 1, 2, 3 or 4.
             while (!Int32.TryParse(input, out option) || (!(option > 0 && option < 5)))
             {
-                Console.WriteLine("Error: Your input is invalid. Choose from 1 through 4. ");
+                Console.WriteLine("ERROR: Your input is invalid. Choose from 1, 2, 3 or 4. ");
                 input = Console.ReadLine();
             }
             return option; 
         }
 
-        private static void NewOrder()
+        private static decimal NewOrder(decimal currentTotal)
         {
+            decimal newTotal = currentTotal;
+            Console.WriteLine("PLACE A NEW ORDER - "); //If no order already exists then the user starts creating a new order.
+            return newTotal;
+        }
+        private static decimal ModifyOrder( decimal currentTotal )
+        {
+            decimal newTotal = currentTotal;
+            Console.WriteLine("MODIFY YOUR ORDER - ");
+
+            return newTotal;
 
         }
-        private static void ModifyOrder()
+        private static decimal DisplayOrder( decimal currentTotal )
         {
+            decimal newTotal = currentTotal;
+            Console.WriteLine("VIEW YOUR ORDER - ");
+
+            return newTotal;
 
         }
-        private static void DisplayOrder()
+
+        private static void CalculatePrice()
         {
 
         }
