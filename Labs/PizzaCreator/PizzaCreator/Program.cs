@@ -12,11 +12,11 @@ namespace PizzaCreator
 {
     class Program
     {
-        
+        public static decimal totalPrice = 0.00M; // make totalPrice readable by the entire class.
+
         static void Main( string[] args )
         {
             int option;
-            decimal totalPrice = 0;
             Console.WriteLine("Welcome to the Pizza Creator.");
             do
             {
@@ -24,15 +24,15 @@ namespace PizzaCreator
                 option = SelectOption();
                 switch (option)
                 {
-                    case 1: totalPrice = NewOrder(totalPrice); break;
-                    case 2: totalPrice = ModifyOrder(totalPrice); break;
-                    case 3: totalPrice = DisplayOrder(totalPrice); break;
-                    case 4: 
+                    case 1: totalPrice = NewOrder(); break;
+                    case 2: totalPrice = ModifyOrder(); break;
+                    case 3: totalPrice = DisplayOrder(); break;
+                    case 4: //case falls through to default.
                     default: Console.WriteLine("Good bye.");
                     System.Threading.Thread.Sleep(1000); // Wait for 1 second before exiting
                     break;
                 }
-
+                CalculatePrice();
                 Console.WriteLine();
             } while (option != 4);
         }
@@ -59,32 +59,35 @@ namespace PizzaCreator
             return option; 
         }
 
-        private static decimal NewOrder(decimal currentTotal)
+        private static decimal NewOrder()
         {
-            decimal newTotal = currentTotal;
+            
             Console.WriteLine("PLACE A NEW ORDER - "); //If no order already exists then the user starts creating a new order.
+
+            decimal newTotal = totalPrice;
             return newTotal;
         }
-        private static decimal ModifyOrder( decimal currentTotal )
+        private static decimal ModifyOrder()
         {
-            decimal newTotal = currentTotal;
             Console.WriteLine("MODIFY YOUR ORDER - ");
 
+            decimal newTotal = totalPrice;
             return newTotal;
 
         }
-        private static decimal DisplayOrder( decimal currentTotal )
+        private static decimal DisplayOrder()
         {
-            decimal newTotal = currentTotal;
             Console.WriteLine("VIEW YOUR ORDER - ");
 
+            decimal newTotal = totalPrice;
             return newTotal;
 
         }
 
         private static void CalculatePrice()
         {
-
+            Console.WriteLine(totalPrice.ToString("C2")); //Format totalPrice into currency ($) with 2 decimal places.
+            Console.WriteLine();
         }
     }
 }
