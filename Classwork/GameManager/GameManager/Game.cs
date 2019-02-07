@@ -18,6 +18,18 @@ namespace GameManager
         public bool Owned;
         public bool Completed;
 
+        ///<summary>Validates the object.</summary>
+        public bool Validate()
+        {
+            //Name required
+            if (String.IsNullOrEmpty(Name))
+                return false;
 
+            //Price >= 0
+            if (Price < 0)
+                return false;
+
+            return true;
+        }
     }
 }

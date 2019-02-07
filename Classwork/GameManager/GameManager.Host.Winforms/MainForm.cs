@@ -23,10 +23,21 @@ namespace GameManager.Host.Winforms
         {
             Game game = new Game();
 
-            String.Format()
-
             game.Name = "TimeSplitters 2";
-            game.Price = 29.99M;
+            game.Price = 59.99M;
+
+            game.Validate();
+        }
+
+        private void OnFileExit(object sender, EventArgs e)
+        {
+
+            Close();
+        }
+
+        private void OnHelpAbout(object sender, EventArgs e)
+        {
+            MessageBox.Show("Help");
         }
     }
 }

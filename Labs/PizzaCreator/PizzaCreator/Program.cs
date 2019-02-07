@@ -22,6 +22,7 @@ namespace PizzaCreator
             {
                 DisplayMenu();
                 option = SelectOption();
+                Console.Clear();
                 switch (option)
                 {
                     case 1: totalPrice = NewOrder(); break;
