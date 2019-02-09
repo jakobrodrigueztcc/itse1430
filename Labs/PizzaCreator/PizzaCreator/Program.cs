@@ -223,7 +223,7 @@ namespace PizzaCreator
             if (onions) totalPrice += toppingVeggie;
             if (peppers) totalPrice += toppingVeggie;
 
-            return totalPrice.ToString("C2"); //Format totalPrice into currency ($) with 2 decimal places.
+            return totalPrice.ToString("C2");
         }
         public void MakeOrder()
         {
