@@ -26,6 +26,11 @@ namespace GameManager.Host.Winforms
             game.Name = "TimeSplitters 2";
             game.Price = 59.99M;
 
+            var name = game.Name;
+            if (name.Length == 0)
+                /* is empty*/;
+
+
             game.Validate();
         }
 
