@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FBF39FC6-23FC-479F-ADC2-A3A97D8A1005}</ProjectGuid>
+    <ProjectGuid>{52AEE535-09CA-4C36-8EDE-CADF6D98E0E7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CharacterCreator.Winforms</RootNamespace>
-    <AssemblyName>CharacterCreator.Winforms</AssemblyName>
+    <RootNamespace>CharacterCreator</RootNamespace>
+    <AssemblyName>CharacterCreator</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

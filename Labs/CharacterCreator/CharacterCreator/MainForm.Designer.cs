@@ -1,4 +1,4 @@
-﻿namespace CharacterCreator.Winforms
+﻿namespace CharacterCreator
 {
     partial class MainForm
     {

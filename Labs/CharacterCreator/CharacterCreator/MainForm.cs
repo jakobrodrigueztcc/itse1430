@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CharacterCreator.Winforms
+namespace CharacterCreator
 {
     public partial class MainForm : Form
     {
