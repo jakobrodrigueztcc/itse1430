@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GameManager.Host.Winforms
 {
+    /// <summary>Allows adding or editing a game.</summary>
     public partial class GameForm : Form
     {
         public GameForm()
@@ -17,27 +11,34 @@ namespace GameManager.Host.Winforms
             InitializeComponent();
         }
 
+        /// <summary>Gets or sets the property being edited.</summary>
         public Game Game { get; set; }
 
+        //Called when the user saves the game
         private void OnSave(object sender, EventArgs e)
         {
+            Game = SaveData();
+
             DialogResult = DialogResult.OK;
             Close();
         }
 
+        //Called when the user cancels the add/edit
         private void OnCancel(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private decimal ReadDecimal (TextBox control)
+        private decimal ReadDecimal(TextBox control)
         {
             if (Decimal.TryParse(control.Text, out var value))
                 return value;
 
             return -1;
         }
+
+        //Loads UI with game
         private void LoadData(Game game)
         {
             _txtName.Text = game.Name;
@@ -47,20 +48,28 @@ namespace GameManager.Host.Winforms
             _cbCompleted.Checked = game.Completed;
         }
 
+        //Saves UI into new game
         private Game SaveData()
         {
             var game = new Game();
             game.Name = _txtName.Text;
             game.Publisher = _txtPublisher.Text;
             game.Price = ReadDecimal(_txtPrice);
-            game.Owned = _cbCompleted.Checked;
-            game.Completed = _cbOwned.Checked;
+            game.Owned = _cbOwned.Checked;
+            game.Completed = _cbCompleted.Checked;
 
             return game;
         }
 
-        private void GameForm_Load(object sender, EventArgs e)
+        //Defined in type
+        //Derived type may override and change it
+        //protected virtual void CanBeChanged() { }
+
+        protected override void OnLoad(EventArgs e) //is designed to be called just before the for renders
         {
+            //this.OnLoad(e);
+            base.OnLoad(e); //the purpose is to give the derived type to do something
+                            //before it notifies the rest of the world that it's loading
             //Init UI if editing a game
             if (Game != null)
                 LoadData(Game);

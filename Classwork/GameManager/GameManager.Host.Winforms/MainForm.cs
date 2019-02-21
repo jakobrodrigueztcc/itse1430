@@ -31,6 +31,19 @@ namespace GameManager.Host.Winforms
                 /* is empty*/;
 
 
+            //Checking for null - long way
+            if (game.Name != null && game.Name.Length == 0)
+                ;
+
+            //Short way - null conditional
+            // game.Name.Length -> int
+            // game.Name?.Length -> int? (null or int... null is not 0)
+            if ((game.Name?.Length ?? 0) == 0)
+                ;
+            if (game.Name.Length == 0)
+                /* is empty */
+                ;
+
             game.Validate();
         }
 
@@ -42,8 +55,24 @@ namespace GameManager.Host.Winforms
 
         private void OnHelpAbout(object sender, EventArgs e)
         {
-            AboutBox form = new AboutBox();
+            var form = new AboutBox();
             form.ShowDialog();
+        }
+
+        private void BindList()
+        {
+            //Bind games to listbox
+            _listGames.Items.Clear();
+
+            //nameof(Game.Name) == "Name"
+            _listGames.DisplayMember = nameof(Game.Name);
+
+            //_listGames.Items.AddRange(_games);
+            foreach (var game in _games)
+            {
+                if (game != null)
+                    _listGames.Items.Add(game);
+            };
         }
 
         private void OnGameAdd(object sender, EventArgs e)
@@ -51,30 +80,59 @@ namespace GameManager.Host.Winforms
             //Display UI
             var form = new GameForm();
 
-            /* form.Show(); does the same thing as form.ShowDialog()
-                            but allows the user to continue using main window. (modeless) */
-            
-            if (form.ShowDialog() != DialogResult.OK) //Modal
+            //Modeless
+            //form.Show();
+
+            //Modal
+            if (form.ShowDialog(this) != DialogResult.OK)
                 return;
 
-            //If OK then "add" to system
-            _game = form.Game;
+            //TODO: Add
+            _games[GetNextEmptyGame()] = form.Game;
+            BindList();
         }
 
-        private Game _game;
+        //HACK: Find first spot in array with no game
+        private int GetNextEmptyGame()
+        {
+            for (var index = 0; index < _games.Length; ++index)
+                if (_games[index] == null)
+                    return index;
+
+            return -1;
+        }
+
+        private Game[] _games = new Game[100];
 
         private void OnGameEdit(object sender, EventArgs e)
         {
-            //Display UI
             var form = new GameForm();
 
+            var game = GetSelectedGame();
+            if (game == null)
+                return;
+
             //Game to edit
-            form.Game = _game;
+            form.Game = game;
 
             if (form.ShowDialog(this) != DialogResult.OK)
                 return;
-            
-            _game = form.Game;
+
+            //TODO: Fix to edit, not add
+            UpdateGame(game, form.Game);
+            BindList();
+        }
+
+        private void UpdateGame(Game oldGame, Game newGame)
+        {
+            for (var index = 0; index < _games.Length; ++index)
+            {
+                if (_games[index] == oldGame)
+                {
+                    _games[index] = newGame;
+                    break;
+                };
+            };
         }
 
         private void OnGameDelete(object sender, EventArgs e)
@@ -85,18 +143,47 @@ namespace GameManager.Host.Winforms
                 return;
 
             //Display confirmation
-            if(MessageBox.Show($"Are you sure youu want to delete {selected.Name}?", 
-                "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-            {
+            if (MessageBox.Show(this, $"Are you sure you want to delete {selected.Name}?",
+                               "Confirm Deletion", MessageBoxButtons.YesNo,
+                               MessageBoxIcon.Question) != DialogResult.Yes)
                 return;
-            }
-            //TODO: Delete
-            _game = null;
 
+            //TODO: Delete
+            DeleteGame(selected);
+            BindList();
         }
+
+        private void DeleteGame(Game game)
+        {
+            for (var index = 0; index < _games.Length; ++index)
+            {
+                if (_games[index] == game)
+                {
+                    _games[index] = null;
+                    break;
+                };
+            };
+        }
+
         private Game GetSelectedGame()
         {
-            return _game;
+            var value = _listGames.SelectedItem;
+
+            //C-style cast - don't do this
+            //var game = (Game)value;
+
+            //Preferred - null if not valid
+            var game = value as Game;
+
+            //Type check
+            var game2 = (value is Game) ? (Game)value : null;
+
+            return _listGames.SelectedItem as Game;
+        }
+
+        private void OnGameSelected(object sender, EventArgs e)
+        {
+
         }
     }
 }

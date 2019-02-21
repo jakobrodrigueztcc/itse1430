@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameManager
 {
-    ///<summary>Represents a game.</summary>
+    /// <summary>Represents a game.</summary>
     public class Game
     {
-        ///<summary>The name of the game.</summary>
-        public string Name //property. itself, it doesnt have data.
+        /// <summary>Name of the game.</summary>
+        public string Name
         {
-            get { return _name ?? ""; } //null coalesce operator. if left is null, use right instead.
-            set { _name = value; } //setter for the _field
+            get { return _name ?? ""; }
+            set { _name = value ?? ""; }
         }
 
-        private string _name = ""; //field. MUST be private.
+        private string _name = "";
 
-        ///<summary>The game's publisher.</summary>
+        /// <summary>Publisher of the game.</summary>
         public string Publisher
         {
             get { return _publisher ?? ""; }
@@ -32,26 +28,38 @@ namespace GameManager
             get { return Publisher != "EA"; }
         }
 
-        public decimal Price
-        {
-            get { return _price; }
-            set { _price = value; }
-        }
-        private decimal _price;
+        //Setter only
+        //public string Password
+        //{
+        //    set { }
+        //}
 
-        public bool Owned
-        {
-            get { return _owned; }
-            set { _owned = value; }
-        }
-        private bool _owned;
+        //Auto property
+        public decimal Price { get; set; }
 
-        public bool Completed
+        //public decimal Price
+        //{
+        //    get { return _price; }
+        //    set { _price = value; }
+        //}
+        //private decimal _price;
+
+        public bool Owned { get; set; } = true;
+
+        public bool Completed { get; set; }
+
+        //Mixed accessibility
+        public double Rate
         {
-            get { return _completed; }
-            set { _completed = value; }
+            get;
+            internal set;
         }
-        private bool _completed;
+
+        public void Foo()
+        {
+            //NOT DETERMINISTIC - should have been a method
+            var now = DateTime.Now;
+        }
 
         //Can init the data as well
         //public string[] Genres { get; set; }
@@ -72,16 +80,23 @@ namespace GameManager
         //public string[] genres = new string[10];
         //private decimal realPrice = Price;
 
-        ///<summary>Validates the object.</summary>
-        public bool Validate()
+        /// <summary>Validates the object.</summary>
+        /// <returns>true if valid or false otherwise.</returns>
+        public bool Validate( /* Game this */ )
         {
-            //Name required
+            //Redundant dude
+            //var str = this.Name;
+
+            //Name is required
             if (String.IsNullOrEmpty(Name))
                 return false;
 
             //Price >= 0
             if (Price < 0)
                 return false;
+
+            //Only if you need to pass the instance to somebody else
+            //MyType.Foo(this);
 
             return true;
         }
