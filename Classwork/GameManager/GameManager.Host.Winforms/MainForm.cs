@@ -185,5 +185,15 @@ namespace GameManager.Host.Winforms
         {
 
         }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (MessageBox.Show(this, "Are you sure?", "Close", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                e.Cancel = true;
+                return;
+            };
+            base.OnFormClosing(e);
+        }
     }
 }

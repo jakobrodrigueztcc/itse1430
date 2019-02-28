@@ -45,7 +45,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 16);
+            this.label1.Location = new System.Drawing.Point(35, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
@@ -54,7 +54,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 58);
+            this.label2.Location = new System.Drawing.Point(20, 58);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 1;
@@ -63,7 +63,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 97);
+            this.label3.Location = new System.Drawing.Point(39, 97);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 2;
@@ -87,7 +87,8 @@
             // 
             // _btnSave
             // 
-            this._btnSave.Location = new System.Drawing.Point(166, 249);
+            this._btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this._btnSave.Location = new System.Drawing.Point(166, 185);
             this._btnSave.Name = "_btnSave";
             this._btnSave.Size = new System.Drawing.Size(75, 23);
             this._btnSave.TabIndex = 5;
@@ -97,7 +98,8 @@
             // 
             // _btnCancel
             // 
-            this._btnCancel.Location = new System.Drawing.Point(268, 249);
+            this._btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this._btnCancel.Location = new System.Drawing.Point(247, 185);
             this._btnCancel.Name = "_btnCancel";
             this._btnCancel.Size = new System.Drawing.Size(75, 23);
             this._btnCancel.TabIndex = 6;
@@ -108,49 +110,53 @@
             // _cbCompleted
             // 
             this._cbCompleted.AutoSize = true;
-            this._cbCompleted.Location = new System.Drawing.Point(87, 171);
+            this._cbCompleted.Location = new System.Drawing.Point(76, 155);
             this._cbCompleted.Name = "_cbCompleted";
             this._cbCompleted.Size = new System.Drawing.Size(76, 17);
-            this._cbCompleted.TabIndex = 7;
+            this._cbCompleted.TabIndex = 4;
             this._cbCompleted.Text = "Completed";
             this._cbCompleted.UseVisualStyleBackColor = true;
             // 
             // _cbOwned
             // 
             this._cbOwned.AutoSize = true;
-            this._cbOwned.Location = new System.Drawing.Point(87, 138);
+            this._cbOwned.Location = new System.Drawing.Point(76, 132);
             this._cbOwned.Name = "_cbOwned";
             this._cbOwned.Size = new System.Drawing.Size(60, 17);
-            this._cbOwned.TabIndex = 8;
+            this._cbOwned.TabIndex = 3;
             this._cbOwned.Text = "Owned";
             this._cbOwned.UseVisualStyleBackColor = true;
             // 
             // _txtName
             // 
-            this._txtName.Location = new System.Drawing.Point(87, 13);
+            this._txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._txtName.Location = new System.Drawing.Point(76, 16);
             this._txtName.Name = "_txtName";
-            this._txtName.Size = new System.Drawing.Size(100, 20);
-            this._txtName.TabIndex = 9;
+            this._txtName.Size = new System.Drawing.Size(246, 20);
+            this._txtName.TabIndex = 0;
             // 
             // _txtPublisher
             // 
-            this._txtPublisher.Location = new System.Drawing.Point(87, 55);
+            this._txtPublisher.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._txtPublisher.Location = new System.Drawing.Point(76, 55);
             this._txtPublisher.Name = "_txtPublisher";
-            this._txtPublisher.Size = new System.Drawing.Size(100, 20);
-            this._txtPublisher.TabIndex = 10;
+            this._txtPublisher.Size = new System.Drawing.Size(246, 20);
+            this._txtPublisher.TabIndex = 1;
             // 
             // _txtPrice
             // 
-            this._txtPrice.Location = new System.Drawing.Point(87, 94);
+            this._txtPrice.Location = new System.Drawing.Point(76, 94);
             this._txtPrice.Name = "_txtPrice";
-            this._txtPrice.Size = new System.Drawing.Size(100, 20);
-            this._txtPrice.TabIndex = 11;
+            this._txtPrice.Size = new System.Drawing.Size(87, 20);
+            this._txtPrice.TabIndex = 2;
             // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(429, 337);
+            this.ClientSize = new System.Drawing.Size(334, 221);
             this.Controls.Add(this._txtPrice);
             this.Controls.Add(this._txtPublisher);
             this.Controls.Add(this._txtName);
@@ -164,7 +170,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(600, 260);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(350, 260);
             this.Name = "GameForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
