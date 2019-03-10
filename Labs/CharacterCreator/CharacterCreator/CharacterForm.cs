@@ -69,20 +69,21 @@ namespace CharacterCreator.Winforms
         //Saves UI into new character
         private Character SaveData()
         {
-            var kaiju = new Character();
-            kaiju.Name = _txtName.Text;
-            kaiju.Description = _txtDescription.Text;
-            kaiju.Species = _cbSpecies.SelectedIndex;
-            kaiju.Class = _cbClass.SelectedIndex;
-            kaiju.Weapon = _cbWeapon.SelectedIndex;
-            kaiju.Strength = (int)_nudStrength.Value;
-            kaiju.Defense = (int)_nudDefense.Value;
-            kaiju.Speed = (int)_nudSpeed.Value;
-            kaiju.Flight = _cbFlight.Checked;
-            kaiju.Intelligence = (int)_nudIntelligence.Value;
-            kaiju.Social = (int)_nudSocial.Value;
-
-
+            var kaiju = new Character
+            {
+                Name = _txtName.Text,
+                Description = _txtDescription.Text,
+                Species = _cbSpecies.SelectedIndex,
+                Class = _cbClass.SelectedIndex,
+                Weapon = _cbWeapon.SelectedIndex,
+                Strength = (int)_nudStrength.Value,
+                Defense = (int)_nudDefense.Value,
+                Speed = (int)_nudSpeed.Value,
+                Flight = _cbFlight.Checked,
+                Intelligence = (int)_nudIntelligence.Value,
+                Social = (int)_nudSocial.Value
+            };
+            
             return kaiju;
         }
 

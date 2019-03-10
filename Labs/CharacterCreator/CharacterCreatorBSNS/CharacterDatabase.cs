@@ -155,12 +155,27 @@ namespace CharacterCreator
 
         public Character Update( int id, Character kaiju )
         {
-            var index = GetIndex(id);
-            var existing = _items[index];
+            //Validate
+            if (id <= 0)
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
+            if (kaiju == null)
+                throw new ArgumentNullException(nameof(kaiju));
+            if (!kaiju.Validate())
+                throw new Exception("Kaiju is not valid.");
 
-            Clone(existing, kaiju);
+            var index = GetIndex(id);
+            if (index < 0)
+                throw new Exception("Kaiju does not exist.");
+
+            //Game names must be unique
+            var existingIndex = GetIndex(kaiju.Name);
+            if (existingIndex >= 0 && existingIndex != index)
+                throw new Exception("The kaiju's name must be unique.");
 
             kaiju.Id = id;
+            var existing = _items[index];
+            Clone(existing, kaiju);
+
             return kaiju;
         }
 

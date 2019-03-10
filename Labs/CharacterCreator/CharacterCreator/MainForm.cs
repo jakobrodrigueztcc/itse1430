@@ -58,11 +58,41 @@ namespace CharacterCreator.Winforms
             var form = new CharacterForm();
             form.Text = "Create New Kaiju";
 
-            if (form.ShowDialog(this) != DialogResult.OK)
-                return;
+            while (true)
+            {
+                //Modal
+                if (form.ShowDialog(this) != DialogResult.OK)
+                    return;
 
-            _kaiju.Add(form.Kaiju);
+                //Add
+                try
+                {
+                    OnSafeAdd(form);
+                    break;
+                } catch (Exception ex)
+                {
+                    //Recover from errors
+                    DisplayError(ex);
+                };
+            };
+
             BindList();
+        }
+
+        private void DisplayError( Exception ex )
+        {
+            MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void OnSafeAdd( CharacterForm form )
+        {
+            try
+            {
+                _kaiju.Add(form.Kaiju);
+            } catch (Exception e)
+            {
+                throw e;
+            };
         }
 
         private void OnCharacterEdit( object sender, EventArgs e )
@@ -77,10 +107,22 @@ namespace CharacterCreator.Winforms
             //Character to edit
             form.Kaiju = kaiju;
 
-            if (form.ShowDialog(this) != DialogResult.OK)
-                return;
-     
-            _kaiju.Update(kaiju.Id, form.Kaiju);
+            while (true)
+            {
+                if (form.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                try
+                {
+                    //UpdateGame(game, form.Game);            
+                    _kaiju.Update(kaiju.Id, form.Kaiju);
+                    break;
+                } catch (Exception ex)
+                {
+                    DisplayError(ex);
+                };
+            };
+
             BindList();
         }
 
