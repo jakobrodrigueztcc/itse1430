@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* Jakob Rodriguez
+ * ITSE 1430
+ * 3/9/2018
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CharacterCreator
+namespace CharacterCreator.Winforms
 {
     public partial class MainForm : Form
     {
@@ -16,5 +20,100 @@ namespace CharacterCreator
         {
             InitializeComponent();
         }
+
+        private CharacterDatabase _kaiju = new CharacterDatabase();
+
+        private void OnFileExit( object sender, EventArgs e )
+        {
+            Close();
+        }
+
+        private void OnHelpAbout( object sender, EventArgs e )
+        {
+            var form = new AboutBox();
+            form.ShowDialog();
+        }
+
+        private void OnLoad( object sender, EventArgs e )
+        {
+            /*base.OnLoad(e);*/
+            BindList();
+        }
+
+        private void BindList()
+        {
+            //Bind to listbox
+            _listCharacters.Items.Clear();
+
+            //nameof(Character.Name) == "Name"
+            _listCharacters.DisplayMember = nameof(Character.Name);
+
+            _listCharacters.Items.AddRange(_kaiju.GetAll());
+        }
+
+
+        private void OnCharacterNew( object sender, EventArgs e )
+        {
+            //Display UI
+            var form = new CharacterForm();
+            form.Text = "Create New Kaiju";
+
+            if (form.ShowDialog(this) != DialogResult.OK)
+                return;
+
+            _kaiju.Add(form.Kaiju);
+            BindList();
+        }
+
+        private void OnCharacterEdit( object sender, EventArgs e )
+        {
+            var form = new CharacterForm();
+            form.Text = "Edit Kaiju";
+
+            var kaiju = GetSelectedCharacter();
+            if (kaiju == null)
+                return;
+
+            //Character to edit
+            form.Kaiju = kaiju;
+
+            if (form.ShowDialog(this) != DialogResult.OK)
+                return;
+     
+            _kaiju.Update(kaiju.Id, form.Kaiju);
+            BindList();
+        }
+
+        private void OnCharacterDelete( object sender, EventArgs e )
+        {
+            //Get selected character
+            var selected = GetSelectedCharacter();
+            if (selected == null)
+                return;
+
+            //Display confirmation
+            if (MessageBox.Show(this, $"Are you sure you want to delete \"{selected.Name}\"?",
+                               "Delete Kaiju", MessageBoxButtons.YesNo,
+                               MessageBoxIcon.Question) != DialogResult.Yes)
+                return;
+            
+            _kaiju.Delete(selected.Id);
+            BindList();
+        }
+
+        private Character GetSelectedCharacter()
+        {
+            var value = _listCharacters.SelectedItem;
+            var kaiju = value as Character;
+            var kaiju2 = (value is Character) ? (Character)value : null;
+
+            return _listCharacters.SelectedItem as Character;
+        }
+
+        private void OnCharacterSelected( object sender, EventArgs e )
+        {
+
+        }
+       
     }
 }
