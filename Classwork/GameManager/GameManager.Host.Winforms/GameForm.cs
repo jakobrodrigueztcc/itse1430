@@ -6,7 +6,7 @@ namespace GameManager.Host.Winforms
     /// <summary>Allows adding or editing a game.</summary>
     public partial class GameForm : Form
     {
-        public GameForm()
+        public GameForm() //: base()
         {
             InitializeComponent();
         }
@@ -15,35 +15,37 @@ namespace GameManager.Host.Winforms
         public Game Game { get; set; }
 
         //Called when the user saves the game
-        private void OnSave(object sender, EventArgs e)
+        private void OnSave( object sender, EventArgs e )
         {
             if (!ValidateChildren())
                 return;
+
             var game = SaveData();
-            //Validate at UI level
 
             //Validate at business level
             if (!game.Validate())
             {
-                MessageBox.Show("Game not valid.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show(this, "Game not valid.", "Error", MessageBoxButtons.OK);
                 return;
             };
+
             Game = game;
             DialogResult = DialogResult.OK;
             Close();
         }
 
         //Called when the user cancels the add/edit
-        private void OnCancel(object sender, EventArgs e)
+        private void OnCancel( object sender, EventArgs e )
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private decimal ReadDecimal(TextBox control)
+        private decimal ReadDecimal( TextBox control )
         {
             if (control.Text.Length == 0)
                 return 0;
+
             if (Decimal.TryParse(control.Text, out var value))
                 return value;
 
@@ -51,7 +53,7 @@ namespace GameManager.Host.Winforms
         }
 
         //Loads UI with game
-        private void LoadData(Game game)
+        private void LoadData( Game game )
         {
             _txtName.Text = game.Name;
             _txtDescription.Text = game.Description;
@@ -70,25 +72,30 @@ namespace GameManager.Host.Winforms
             game.Owned = _cbOwned.Checked;
             game.Completed = _cbCompleted.Checked;
 
+            //Demoing ctor
+            var game2 = new Game(_txtName.Text, ReadDecimal(_txtPrice));
+
             return game;
         }
 
         //Defined in type
-        //Derived type may override and change it
-        //protected virtual void CanBeChanged() { }
+        //Derived types may override and change it
+        protected virtual void CanBeChanged() { }
 
-        protected override void OnLoad(EventArgs e) //is designed to be called just before the for renders
+        //Overriding a virtual member in Form
+        protected override void OnLoad( EventArgs e )
         {
             //this.OnLoad(e);
-            base.OnLoad(e); //the purpose is to give the derived type to do something
-                            //before it notifies the rest of the world that it's loading
+            base.OnLoad(e);
+
             //Init UI if editing a game
             if (Game != null)
                 LoadData(Game);
+
             ValidateChildren();
         }
 
-        private void OnValidateName(object sender, System.ComponentModel.CancelEventArgs e)
+        private void OnValidateName( object sender, System.ComponentModel.CancelEventArgs e )
         {
             var tb = sender as TextBox;
 
@@ -96,24 +103,20 @@ namespace GameManager.Host.Winforms
             {
                 _errors.SetError(tb, "Name is required.");
                 e.Cancel = true;
-            }
-            else
+            } else
                 _errors.SetError(tb, "");
-
         }
 
-        private void OnValidatePrice(object sender, System.ComponentModel.CancelEventArgs e)
+        private void OnValidatePrice( object sender, System.ComponentModel.CancelEventArgs e )
         {
-
             var tb = sender as TextBox;
-            var price = ReadDecimal(tb);
 
+            var price = ReadDecimal(tb);
             if (price < 0)
             {
                 _errors.SetError(tb, "Price must be >= 0.");
                 e.Cancel = true;
-            }
-            else
+            } else
                 _errors.SetError(tb, "");
         }
     }
