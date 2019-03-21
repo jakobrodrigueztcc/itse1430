@@ -89,11 +89,20 @@ namespace GameManager.Host.Winforms
         {
             //Bind games to listbox
             _listGames.Items.Clear();
-
-            //nameof(Game.Name) == "Name"
             _listGames.DisplayMember = nameof(Game.Name);
 
-            _listGames.Items.AddRange(_games.GetAll());
+            //Can use AddRange now that we don't care about null items
+            //var enumor = _games.GetAll();
+            //var enumoror = enumor.GetEnumerator();
+            //while (enumoror.MoveNext())
+            //{
+            //    var item = enumoror.Current;
+            //};
+            ////foreach (var item in enumor)
+            //{
+            //};
+
+            _listGames.Items.AddRange(_games.GetAll().ToArray());
             //foreach (var game in _games)
             //{
             //    if (game != null)
@@ -159,21 +168,13 @@ namespace GameManager.Host.Winforms
 
                 //Rethrow exception -- "I have not handled it, keep looking"
                 //Not something you'll do often. Log the scenario and let it go on.
-                throw e;
+                //throw e;
+                throw;
             };
         }
 
-        ////HACK: Find first spot in array with no game
-        //private int GetNextEmptyGame ()
-        //{
-        //    for (var index = 0; index < _games.Length; ++index)
-        //        if (_games[index] == null)
-        //            return index;
+        private IGameDatabase _games = new GameDatabase();
 
-        //    return -1;
-        //}
-
-        private GameDatabase _games = new GameDatabase();
 
         private void OnGameEdit(object sender, EventArgs e)
         {
