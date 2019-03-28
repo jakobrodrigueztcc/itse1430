@@ -23,10 +23,11 @@ namespace GameManager.Host.Winforms
 
             var game = SaveData();
 
-            //Validate at business level
+            //Validate at business level using IValidatableObject
             try
             {
-                new ObjectValidator().Validate(game); //missing the assembly when first adding this line. need to add reference.
+                //new ObjectValidator().Validate(game);
+                ObjectValidator.Validate(game);
             } catch (ValidationException)
             {
                 MessageBox.Show(this, "Game not valid.", "Error", MessageBoxButtons.OK);

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * ITSE 1430
+ * 
+ * Provides a sample implementation of a game database.
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,20 +13,6 @@ namespace GameManager
 {
     public class MemoryGameDatabase : GameDatabase
     {
-        public MemoryGameDatabase()
-        {
-            //Collection initializer
-            var games = new Game[]
-                {
-                    new Game() { Name = "TimeSplitters", Description = "2000", Price = 49.99M },
-                    new Game() { Name = "Super Smash Bros. Ultimate", Description = "2018", Price = 59.99M },
-                    new Game() { Name = "Steven Universe: Save the Light", Description = "2017", Price = 24.99M }
-                };
-
-            foreach (var game in games)
-                AddCore(game);
-        }
-
         protected override Game AddCore( Game game )
         {
             game.Id = ++_nextId;

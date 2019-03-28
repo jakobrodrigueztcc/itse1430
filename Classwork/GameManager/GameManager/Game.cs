@@ -5,9 +5,11 @@ using System.ComponentModel.DataAnnotations;
 namespace GameManager
 {
     /// <summary>Represents a game.</summary>
-    public class Game :IValidatableObject
+    public class Game : IValidatableObject
     {
+        /// <summary>Gets or sets the unique ID of the game.</summary>
         public int Id { get; set; }
+
         /// <summary>Gets or sets the name of the game.</summary>
         public string Name
         {
@@ -36,19 +38,6 @@ namespace GameManager
         public override string ToString()
         {
             return Name;
-        }
-
-        /// <summary>Validates the object.</summary>
-        /// <returns>true if valid or false otherwise.</returns>
-        public bool Validate( /* Game this */ )
-        {
-            //Redundant use of this
-            //var str = this.Name;
-
-            //Only if you need to pass the instance to somebody else
-            //MyType.Foo(this);
-
-            return true;
         }
 
         public IEnumerable<ValidationResult> Validate( ValidationContext validationContext )
@@ -83,18 +72,16 @@ namespace GameManager
         // 3) Should behave no different than doing it manually        
         public Game()
         {
-            //Complex init
-            var x = 1 + 2;
         }
 
         //Constructor chaining
-        public Game(string name) : this(name, 0)
+        public Game( string name ) : this(name, 0)
         {
             //Name = name;
         }
 
         //As soon as you define a ctor, no default ctor anymore
-        public Game(string name, decimal price)// : this()
+        public Game( string name, decimal price )// : this()
         {
             Name = name;
             Price = price;
