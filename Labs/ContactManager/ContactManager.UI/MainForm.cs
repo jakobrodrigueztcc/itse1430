@@ -27,5 +27,30 @@ namespace ContactManager.UI
             var form = new AboutBox();
             form.ShowDialog();
         }
+
+        private void OnContactAdd( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnContactDelete( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnGameSelected( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnContactEdit( object sender, EventArgs e )
+        {
+
+        }
+
+        private void OnContactSendMsg( object sender, EventArgs e )
+        {
+
+        }
     }
 }
