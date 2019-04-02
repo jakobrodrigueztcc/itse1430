@@ -29,8 +29,29 @@ namespace ContactManager
             set { _email = value ?? ""; }
         }
 
+        bool IsValidEmail( string source )
+        {
+            try
+            {
+                new System.Net.Mail.MailAddress(source);
+                return true;
+            } catch
+            { };
+
+            return false;
+        }
+
 
         private string _name = "";
         private string _email = "";
+
+        public IEnumerable<ValidationResult> Validate( ValidationContext validationContext )
+        {
+            if(IsValidEmail(_email))
+            {
+                yield return new ValidationResult("Invalid e-mail");
+            }
+            throw new NotImplementedException();
+        }
     }
 }
