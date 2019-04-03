@@ -30,7 +30,31 @@ namespace ContactManager.UI
 
         private void OnContactAdd( object sender, EventArgs e )
         {
-            //open contact form
+            //Display UI
+            var form = new ContactForm();
+
+            while (true)
+            {
+                //Modal
+                if (form.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                //Add
+                try
+                {
+                    //Anything in here that raises an exception will
+                    //be sent to the catch block
+
+                    //OnSafeAdd(form);
+                    break;
+                } catch (Exception ex)
+                {
+                    //Recover from errors
+                    //DisplayError(ex);
+                };
+            };
+
+            //BindList();
         }
 
         private void OnContactEdit( object sender, EventArgs e )
@@ -43,7 +67,7 @@ namespace ContactManager.UI
            //ask if user is sure they want to delete
         }
 
-        private void OnGameSelected( object sender, EventArgs e )
+        private void OnContactSelected( object sender, EventArgs e )
         {
             
         }
@@ -51,6 +75,33 @@ namespace ContactManager.UI
         private void OnContactSendMsg( object sender, EventArgs e )
         {
             //open message form
+            var form = new MessageForm();
+
+            while (true)
+            {
+                //Modal
+                if (form.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                //Add
+                try
+                {
+                    //Anything in here that raises an exception will
+                    //be sent to the catch block
+
+                    //OnSafeAdd(form);
+                    break;
+                } catch (InvalidOperationException)
+                {
+                    MessageBox.Show(this, "Choose a better game.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } catch (Exception ex)
+                {
+                    //Recover from errors
+                    //DisplayError(ex);
+                };
+            };
+
+            //BindList();
         }
     }
 }

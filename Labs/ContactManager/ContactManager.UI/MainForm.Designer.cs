@@ -157,7 +157,7 @@ namespace ContactManager.UI
             this._listContacts.Name = "_listContacts";
             this._listContacts.Size = new System.Drawing.Size(400, 407);
             this._listContacts.TabIndex = 1;
-            this._listContacts.SelectedIndexChanged += new System.EventHandler(this.OnGameSelected);
+            this._listContacts.SelectedIndexChanged += new System.EventHandler(this.OnContactSelected);
             this._listContacts.DoubleClick += new System.EventHandler(this.OnContactEdit);
             // 
             // _tbSentMessages

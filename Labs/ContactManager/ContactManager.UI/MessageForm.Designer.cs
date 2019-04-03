@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -36,6 +37,8 @@
             this._tbBody = new System.Windows.Forms.TextBox();
             this._btnSend = new System.Windows.Forms.Button();
             this._btnCancel = new System.Windows.Forms.Button();
+            this._errors = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -67,6 +70,8 @@
             // 
             // _tbContact
             // 
+            this._tbContact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._tbContact.Location = new System.Drawing.Point(62, 9);
             this._tbContact.Name = "_tbContact";
             this._tbContact.ReadOnly = true;
@@ -75,6 +80,8 @@
             // 
             // _tbSubject
             // 
+            this._tbSubject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._tbSubject.Location = new System.Drawing.Point(61, 36);
             this._tbSubject.Name = "_tbSubject";
             this._tbSubject.Size = new System.Drawing.Size(301, 20);
@@ -82,6 +89,9 @@
             // 
             // _tbBody
             // 
+            this._tbBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._tbBody.Location = new System.Drawing.Point(61, 63);
             this._tbBody.Multiline = true;
             this._tbBody.Name = "_tbBody";
@@ -91,6 +101,7 @@
             // 
             // _btnSend
             // 
+            this._btnSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this._btnSend.Location = new System.Drawing.Point(206, 229);
             this._btnSend.Name = "_btnSend";
             this._btnSend.Size = new System.Drawing.Size(75, 23);
@@ -101,6 +112,7 @@
             // 
             // _btnCancel
             // 
+            this._btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this._btnCancel.Location = new System.Drawing.Point(287, 229);
             this._btnCancel.Name = "_btnCancel";
             this._btnCancel.Size = new System.Drawing.Size(75, 23);
@@ -109,11 +121,17 @@
             this._btnCancel.UseVisualStyleBackColor = true;
             this._btnCancel.Click += new System.EventHandler(this.OnCancel);
             // 
+            // _errors
+            // 
+            this._errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this._errors.ContainerControl = this;
+            // 
             // MessageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 261);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.ClientSize = new System.Drawing.Size(384, 261);
             this.Controls.Add(this._btnCancel);
             this.Controls.Add(this._btnSend);
             this.Controls.Add(this._tbBody);
@@ -122,8 +140,15 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(500, 500);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "MessageForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "MessageForm";
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,5 +164,6 @@
         private System.Windows.Forms.TextBox _tbBody;
         private System.Windows.Forms.Button _btnSend;
         private System.Windows.Forms.Button _btnCancel;
+        private System.Windows.Forms.ErrorProvider _errors;
     }
 }
