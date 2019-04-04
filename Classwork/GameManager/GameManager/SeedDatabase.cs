@@ -11,7 +11,7 @@ namespace GameManager
         public static void Seed (this IGameDatabase source)
         {
             //Collection initializer
-            var games = new Game[]
+            var games = new []
                 {
                     new Game() { Name = "TimeSplitters", Description = "2000", Price = 49.99M },
                     new Game() { Name = "Super Smash Bros. Ultimate", Description = "2018", Price = 59.99M },
