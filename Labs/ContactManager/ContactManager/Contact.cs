@@ -13,45 +13,54 @@ using System.ComponentModel.DataAnnotations;
 namespace ContactManager
 {
     /// <summary>Represents a contact.</summary>
-    public class Contact : IValidatableObject
+    public class Contact /** : IValidatableObject **/
     {
+
+        /// <summary>Id.</summary>
+        public int Id { get; set; }
+
         /// <summary>Gets or sets the name.</summary>
         public string Name
         {
-            get { return _name ?? ""; }
-            set { _name = value ?? ""; }
+            get => _name ?? "";
+            set => _name = value ?? "";
         }
 
         /// <summary>Gets or sets the email.</summary>
-        public string Email //The type should validate that the data is valid.
+        public string Email
         {
-            get { return _email ?? ""; }
-            set { _email = value ?? ""; }
+            get => _email ?? "";
+            set => _email = value ?? "";
         }
 
-        bool IsValidEmail( string source )
-        {
-            try
-            {
-                new System.Net.Mail.MailAddress(source);
-                return true;
-            } catch
-            { };
+        public override string ToString() => Name;
 
+
+        public bool Validate()
+        {
+            if (!String.IsNullOrEmpty(Name) && Email.IsValidEmail())
+                return true;
             return false;
         }
 
 
-        private string _name = "";
-        private string _email = "";
-
+        /**
         public IEnumerable<ValidationResult> Validate( ValidationContext validationContext )
         {
-            if(IsValidEmail(_email))
-            {
-                yield return new ValidationResult("Invalid e-mail");
-            }
-            throw new NotImplementedException();
-        }
+            var items = new List<ValidationResult>();
+
+            //Name
+            if (String.IsNullOrEmpty(Name))
+                items.Add(new ValidationResult("Name is required.", new[] { nameof(Name) }));
+            //E-mail
+            if (Email.IsValidEmail())
+                items.Add(new ValidationResult("Email is invalid.", new[] { nameof(Email) }));
+
+            return items;
+        } **/
+
+
+        private string _name = "";
+        private string _email = "";
     }
 }

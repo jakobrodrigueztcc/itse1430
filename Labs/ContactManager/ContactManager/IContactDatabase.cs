@@ -12,11 +12,11 @@ namespace ContactManager
 {
     public interface IContactDatabase
     {
-        /// <summary>Adds a new game.</summary>
-        /// <param name="game">The game to add.</param>
+        /// <summary>Adds a new contact.</summary>
+        /// <param name="contact">The contact to add.</param>
         /// <returns>The new game.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="game"/> is null.</exception>
-        /// <exception cref="ValidationException"><paramref name="game"/> is invalid.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="contact"/> is null.</exception>
+        /// <exception cref="ValidationException"><paramref name="contact"/> is invalid.</exception>
         /// <exception cref="ArgumentException">A contact with the same name already exists.</exception>
         Contact Add( Contact contact );
 

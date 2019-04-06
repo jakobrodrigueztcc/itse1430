@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ContactManager
 {
-    class Message
+    public class Message
     {
 
         /// <summary>Gets or sets the contact.</summary>
-        public string Contact
+        public Contact Contact
         {
-            get { return _contact ?? ""; }
+            get { return _contact ?? null; }
             set { _contact = value; }
         }
         /// <summary>Gets or sets the subject.</summary>
@@ -27,7 +27,7 @@ namespace ContactManager
             get { return _body ?? ""; }
             set { _body = value; }
         }
-        private string _contact = "";
+        private Contact _contact = null;
         private string _subject = "";
         private string _body = "";
     }

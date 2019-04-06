@@ -38,13 +38,13 @@ namespace ContactManager.UI
             this._miFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.contactsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._miContactsAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this._miContactsEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.sendMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this._miContactsDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._miHelpAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.sendMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this._miContactsEdit = new System.Windows.Forms.ToolStripMenuItem();
             this._listContacts = new System.Windows.Forms.ListBox();
             this._tbSentMessages = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -75,7 +75,7 @@ namespace ContactManager.UI
             // _miFileExit
             // 
             this._miFileExit.Name = "_miFileExit";
-            this._miFileExit.Size = new System.Drawing.Size(180, 22);
+            this._miFileExit.Size = new System.Drawing.Size(92, 22);
             this._miFileExit.Text = "E&xit";
             this._miFileExit.Click += new System.EventHandler(this.OnFileExit);
             // 
@@ -99,6 +99,27 @@ namespace ContactManager.UI
             this._miContactsAdd.Size = new System.Drawing.Size(214, 22);
             this._miContactsAdd.Text = "&Add";
             this._miContactsAdd.Click += new System.EventHandler(this.OnContactAdd);
+            // 
+            // _miContactsEdit
+            // 
+            this._miContactsEdit.Name = "_miContactsEdit";
+            this._miContactsEdit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Insert)));
+            this._miContactsEdit.Size = new System.Drawing.Size(214, 22);
+            this._miContactsEdit.Text = "&Edit";
+            this._miContactsEdit.Click += new System.EventHandler(this.OnContactEdit);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(211, 6);
+            // 
+            // sendMessageToolStripMenuItem
+            // 
+            this.sendMessageToolStripMenuItem.Name = "sendMessageToolStripMenuItem";
+            this.sendMessageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
+            this.sendMessageToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+            this.sendMessageToolStripMenuItem.Text = "&Send message";
+            this.sendMessageToolStripMenuItem.Click += new System.EventHandler(this.OnContactSendMsg);
             // 
             // toolStripSeparator1
             // 
@@ -125,50 +146,38 @@ namespace ContactManager.UI
             // 
             this._miHelpAbout.Name = "_miHelpAbout";
             this._miHelpAbout.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this._miHelpAbout.Size = new System.Drawing.Size(180, 22);
+            this._miHelpAbout.Size = new System.Drawing.Size(126, 22);
             this._miHelpAbout.Text = "A&bout";
             this._miHelpAbout.Click += new System.EventHandler(this.OnHelpAbout);
             // 
-            // sendMessageToolStripMenuItem
-            // 
-            this.sendMessageToolStripMenuItem.Name = "sendMessageToolStripMenuItem";
-            this.sendMessageToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Space)));
-            this.sendMessageToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-            this.sendMessageToolStripMenuItem.Text = "&Send message";
-            this.sendMessageToolStripMenuItem.Click += new System.EventHandler(this.OnContactSendMsg);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(211, 6);
-            // 
-            // _miContactsEdit
-            // 
-            this._miContactsEdit.Name = "_miContactsEdit";
-            this._miContactsEdit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.Insert)));
-            this._miContactsEdit.Size = new System.Drawing.Size(214, 22);
-            this._miContactsEdit.Text = "&Edit";
-            this._miContactsEdit.Click += new System.EventHandler(this.OnContactEdit);
-            // 
             // _listContacts
             // 
+            this._listContacts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this._listContacts.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._listContacts.ForeColor = System.Drawing.SystemColors.InfoText;
             this._listContacts.FormattingEnabled = true;
+            this._listContacts.ItemHeight = 20;
             this._listContacts.Location = new System.Drawing.Point(0, 40);
             this._listContacts.Name = "_listContacts";
-            this._listContacts.Size = new System.Drawing.Size(400, 407);
+            this._listContacts.Size = new System.Drawing.Size(400, 404);
             this._listContacts.TabIndex = 1;
             this._listContacts.SelectedIndexChanged += new System.EventHandler(this.OnContactSelected);
             this._listContacts.DoubleClick += new System.EventHandler(this.OnContactEdit);
             // 
             // _tbSentMessages
             // 
+            this._tbSentMessages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._tbSentMessages.Font = new System.Drawing.Font("Times New Roman", 10F);
             this._tbSentMessages.ImeMode = System.Windows.Forms.ImeMode.Off;
             this._tbSentMessages.Location = new System.Drawing.Point(400, 40);
             this._tbSentMessages.Multiline = true;
             this._tbSentMessages.Name = "_tbSentMessages";
             this._tbSentMessages.ReadOnly = true;
             this._tbSentMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this._tbSentMessages.Size = new System.Drawing.Size(400, 407);
+            this._tbSentMessages.Size = new System.Drawing.Size(400, 404);
             this._tbSentMessages.TabIndex = 2;
             // 
             // label1
@@ -193,15 +202,18 @@ namespace ContactManager.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 451);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this._tbSentMessages);
             this.Controls.Add(this._listContacts);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(1920, 1080);
+            this.MinimumSize = new System.Drawing.Size(816, 490);
             this.Name = "MainForm";
             this.Text = "Contact Manager";
+            this.Load += new System.EventHandler(this.OnLoad);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

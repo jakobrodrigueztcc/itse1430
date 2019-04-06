@@ -44,11 +44,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 12);
+            this.label1.Location = new System.Drawing.Point(4, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Contact";
+            this.label1.Text = "Recipient";
             // 
             // label2
             // 
@@ -86,6 +86,7 @@
             this._tbSubject.Name = "_tbSubject";
             this._tbSubject.Size = new System.Drawing.Size(301, 20);
             this._tbSubject.TabIndex = 4;
+            this._tbSubject.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateSubject);
             // 
             // _tbBody
             // 

@@ -64,6 +64,7 @@
             this._tbName.Name = "_tbName";
             this._tbName.Size = new System.Drawing.Size(209, 20);
             this._tbName.TabIndex = 0;
+            this._tbName.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateName);
             // 
             // _tbEmail
             // 
@@ -72,6 +73,7 @@
             this._tbEmail.Name = "_tbEmail";
             this._tbEmail.Size = new System.Drawing.Size(209, 20);
             this._tbEmail.TabIndex = 1;
+            this._tbEmail.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateEmail);
             // 
             // _btnSave
             // 
