@@ -1,16 +1,16 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Nile.Windows")]
-[assembly: AssemblyDescription("ITSE 1430 Spring 2019")]
+[assembly: AssemblyTitle("Nile.Stores.Sql")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Jakob Rodriguez / TCCD")]
-[assembly: AssemblyProduct("Nile")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCompany("HP Inc.")]
+[assembly: AssemblyProduct("Nile.Stores.Sql")]
+[assembly: AssemblyCopyright("Copyright © HP Inc. 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("8f5366fa-58d9-4dd3-89c7-66975a72f676")]
+[assembly: Guid("71449200-a6c4-4e7a-a5f4-ffb73aaa5656")]
 
 // Version information for an assembly consists of the following four values:
 //

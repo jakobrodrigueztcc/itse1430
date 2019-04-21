@@ -1,8 +1,10 @@
 /*
  * ITSE 1430
+ * Jakob Rodriguez
  */
 using System;
 using System.Windows.Forms;
+using Nile.Stores.Sql;
 
 namespace Nile.Windows
 {
@@ -20,7 +22,11 @@ namespace Nile.Windows
         {
             base.OnLoad(e);
 
+
             _gridProducts.AutoGenerateColumns = false;
+
+            //var connString = ConfigurationManager.ConnectionStrings["database"];
+            //_products = new SqlProductDatabase(connString.ConnectionString);
 
             UpdateList();
         }
@@ -40,8 +46,19 @@ namespace Nile.Windows
 
             //TODO: Handle errors
             //Save product
-            _database.Add(child.Product);
+            try
+            {
+                _database.Add(child.Product);
+            } catch (Exception ex)
+            {
+                DisplayError(ex);
+            }
             UpdateList();
+        }
+
+        private void DisplayError( Exception ex )
+        {
+            MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void OnProductEdit( object sender, EventArgs e )
@@ -118,8 +135,15 @@ namespace Nile.Windows
                 return;
 
             //TODO: Handle errors
-            //Save product
-            _database.Update(child.Product);
+            try
+            {
+                //Save product
+                _database.Update(child.Product);
+            } catch (Exception ex)
+            {
+                DisplayError(ex);
+            };
+
             UpdateList();
         }
 
@@ -134,11 +158,22 @@ namespace Nile.Windows
         private void UpdateList ()
         {
             //TODO: Handle errors
-
-            _bsProducts.DataSource = _database.GetAll();
+            try
+            {
+                _bsProducts.DataSource = _database.GetAll();
+            } catch (Exception ex)
+            {
+                DisplayError(ex);
+            };
         }
 
         private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
         #endregion
+
+        private void OnHelpAbout( object sender, EventArgs e )
+        {
+            var form = new AboutBox();
+            form.ShowDialog();
+        }
     }
 }

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -71,6 +80,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Nile.Stores.Sql\Nile.Stores.Sql.csproj">
+      <Project>{71449200-a6c4-4e7a-a5f4-ffb73aaa5656}</Project>
+      <Name>Nile.Stores.Sql</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NileDatabase\NileDatabase.sqlproj">
+      <Project>{56c0adf1-90e3-4e66-998c-20fe50d88a2d}</Project>
+      <Name>NileDatabase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nile\Nile.csproj">
       <Project>{93bd7a37-01a9-498d-8479-67bef715ea20}</Project>
       <Name>Nile</Name>

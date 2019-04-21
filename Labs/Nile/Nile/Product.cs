@@ -1,12 +1,15 @@
 /*
  * ITSE 1430
+ * Jakob Rodriguez
  */
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Nile
 {
     /// <summary>Represents a product.</summary>
-    public class Product
+    public class Product : IValidatableObject
     {
         /// <summary>Gets or sets the unique identifier.</summary>
         public int Id { get; set; }
@@ -32,9 +35,25 @@ namespace Nile
         /// <summary>Determines if discontinued.</summary>
         public bool IsDiscontinued { get; set; }
 
-        public override string ToString()
+        public override string ToString() => Name;
+
+        public IEnumerable<ValidationResult> Validate( ValidationContext validationContext )
         {
-            return Name;
+            var items = new List<ValidationResult>();
+
+            //Id > 0
+            if (Id < 0)
+                items.Add(new ValidationResult("Id invalid: is less than or equal to 0.", new[] { nameof(Id) }));
+
+            //Name is required
+            if (String.IsNullOrEmpty(Name))
+                items.Add(new ValidationResult("Name is required.", new[] { nameof(Name) }));
+
+            //Price >= 0
+            if (Price < 0)
+                items.Add(new ValidationResult("Price must be 0 or greater.", new[] { nameof(Price) }));
+
+            return items;
         }
 
         #region Private Members

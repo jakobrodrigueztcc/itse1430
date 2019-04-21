@@ -1,5 +1,6 @@
 /*
  * ITSE 1430
+ * Jakob Rodriguez
  */
 using System;
 using System.ComponentModel;
@@ -69,7 +70,8 @@ namespace Nile.Windows
                 IsDiscontinued = _chkDiscontinued.Checked,
             };
 
-            //TODO: Validate product
+
+            ObjectValidator.Validate(product);
 
             Product = product;
             DialogResult = DialogResult.OK;

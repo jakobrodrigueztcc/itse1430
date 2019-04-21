@@ -1,5 +1,6 @@
 /*
  * ITSE 1430
+ * Jakob Rodriguez
  */
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,11 @@ namespace Nile.Stores
         public Product Add ( Product product )
         {
             //TODO: Check arguments
+            if (product == null)
+                throw new ArgumentNullException(nameof(product));
 
-            //TODO: Validate product
+            //Validate product
+            ObjectValidator.Validate(product);
 
             //Emulate database by storing copy
             return AddCore(product);
@@ -27,6 +31,8 @@ namespace Nile.Stores
         public Product Get ( int id )
         {
             //TODO: Check arguments
+            if (id < 0)
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
 
             return GetCore(id);
         }
@@ -43,6 +49,8 @@ namespace Nile.Stores
         public void Remove ( int id )
         {
             //TODO: Check arguments
+            if (id < 0)
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
 
             RemoveCore(id);
         }
@@ -53,8 +61,13 @@ namespace Nile.Stores
         public Product Update ( Product product )
         {
             //TODO: Check arguments
+            if (product == null)
+                throw new ArgumentNullException(nameof(product));
+            if (product.Id < 0)
+                throw new ArgumentOutOfRangeException(nameof(product), "Id must be > 0.");
 
-            //TODO: Validate product
+            //Validate product
+            ObjectValidator.Validate(product);
 
             //Get existing product
             var existing = GetCore(product.Id);
