@@ -16,7 +16,7 @@ namespace GameManager.Host.Winforms
         public Game Game { get; set; }
 
         //Called when the user saves the game
-        private void OnSave( object sender, EventArgs e )
+        private void OnSave(object sender, EventArgs e)
         {
             if (!ValidateChildren())
                 return;
@@ -28,7 +28,8 @@ namespace GameManager.Host.Winforms
             {
                 //new ObjectValidator().Validate(game);
                 ObjectValidator.Validate(game);
-            } catch (ValidationException)
+            }
+            catch (ValidationException)
             {
                 MessageBox.Show(this, "Game not valid.", "Error", MessageBoxButtons.OK);
                 return;
@@ -45,13 +46,13 @@ namespace GameManager.Host.Winforms
         }
 
         //Called when the user cancels the add/edit
-        private void OnCancel( object sender, EventArgs e )
+        private void OnCancel(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private decimal ReadDecimal( TextBox control )
+        private decimal ReadDecimal(TextBox control)
         {
             if (control.Text.Length == 0)
                 return 0;
@@ -63,7 +64,7 @@ namespace GameManager.Host.Winforms
         }
 
         //Loads UI with game
-        private void LoadData( Game game )
+        private void LoadData(Game game)
         {
             _txtName.Text = game.Name;
             _txtDescription.Text = game.Description;
@@ -93,7 +94,7 @@ namespace GameManager.Host.Winforms
         protected virtual void CanBeChanged() { }
 
         //Overriding a virtual member in Form
-        protected override void OnLoad( EventArgs e )
+        protected override void OnLoad(EventArgs e)
         {
             //this.OnLoad(e);
             base.OnLoad(e);
@@ -105,7 +106,7 @@ namespace GameManager.Host.Winforms
             ValidateChildren();
         }
 
-        private void OnValidateName( object sender, System.ComponentModel.CancelEventArgs e )
+        private void OnValidateName(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var tb = sender as TextBox;
 
@@ -113,11 +114,12 @@ namespace GameManager.Host.Winforms
             {
                 _errors.SetError(tb, "Name is required.");
                 e.Cancel = true;
-            } else
+            }
+            else
                 _errors.SetError(tb, "");
         }
 
-        private void OnValidatePrice( object sender, System.ComponentModel.CancelEventArgs e )
+        private void OnValidatePrice(object sender, System.ComponentModel.CancelEventArgs e)
         {
             var tb = sender as TextBox;
 
@@ -126,7 +128,8 @@ namespace GameManager.Host.Winforms
             {
                 _errors.SetError(tb, "Price must be >= 0.");
                 e.Cancel = true;
-            } else
+            }
+            else
                 _errors.SetError(tb, "");
         }
     }

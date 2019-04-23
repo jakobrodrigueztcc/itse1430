@@ -11,6 +11,7 @@ namespace GameManager
         public int Id { get; set; }
 
         /// <summary>Gets or sets the name of the game.</summary>
+        [Required(AllowEmptyStrings = false)]
         public string Name
         {
             //Expression bodied members
@@ -20,7 +21,10 @@ namespace GameManager
             set => _name = value ?? "";
         }
 
-        /// <summary>Gets or sets the description.</summary>
+        /// <summary>Gets or sets the description.</summary>        
+        //[Required]
+        //[Description("Hello")]
+        //[Required, Description("Hello")]
         public string Description
         {
             get => _description ?? "";
@@ -36,6 +40,7 @@ namespace GameManager
         //private bool IsCoolGame2 = true;
 
         /// <summary>Gets or sets the price.</summary>
+        [RangeAttribute(0, Double.MaxValue, ErrorMessage = "Price must be >= 0.")]
         public decimal Price { get; set; }
 
         /// <summary>Determines if the game is owned.</summary>
@@ -52,17 +57,17 @@ namespace GameManager
         //}        
         public override string ToString() => Name;
 
-        public IEnumerable<ValidationResult> Validate( ValidationContext validationContext )
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var items = new List<ValidationResult>();
 
-            //Name is required
-            if (String.IsNullOrEmpty(Name))
-                items.Add(new ValidationResult("Name is required.", new[] { nameof(Name) }));
+            ////Name is required
+            //if (String.IsNullOrEmpty(Name))
+            //    items.Add(new ValidationResult("Name is required.", new[] { nameof(Name) }));
 
             //Price >= 0
-            if (Price < 0)
-                items.Add(new ValidationResult("Price must be >= 0.", new[] { nameof(Price) }));
+            //if (Price < 0)
+            //    items.Add(new ValidationResult("Price must be >= 0.", new[] { nameof(Price) }));
 
             return items;
         }
@@ -89,13 +94,13 @@ namespace GameManager
         }
 
         //Constructor chaining
-        public Game( string name ) : this(name, 0)
+        public Game(string name) : this(name, 0)
         {
             //Name = name;
         }
 
         //As soon as you define a ctor, no default ctor anymore
-        public Game( string name, decimal price )// : this()
+        public Game(string name, decimal price)// : this()
         {
             Name = name;
             Price = price;
