@@ -71,4 +71,20 @@
   <ItemGroup>
     <PostDeploy Include="InitializeProducts.PostDeployment.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nile.Stores.Sql\Nile.Stores.Sql.csproj">
+      <Name>Nile.Stores.Sql</Name>
+      <Project>{71449200-a6c4-4e7a-a5f4-ffb73aaa5656}</Project>
+      <Private>True</Private>
+      <IsModelAware>True</IsModelAware>
+      <GenerateSqlClrDdl>True</GenerateSqlClrDdl>
+    </ProjectReference>
+    <ProjectReference Include="..\Nile\Nile.csproj">
+      <Name>Nile</Name>
+      <Project>{93bd7a37-01a9-498d-8479-67bef715ea20}</Project>
+      <Private>True</Private>
+      <IsModelAware>True</IsModelAware>
+      <GenerateSqlClrDdl>True</GenerateSqlClrDdl>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

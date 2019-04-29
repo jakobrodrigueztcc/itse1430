@@ -58,21 +58,23 @@ namespace Nile.Stores
         /// <summary>Updates a product.</summary>
         /// <param name="product">The product to update.</param>
         /// <returns>The updated product.</returns>
-        public Product Update ( Product product )
+        public Product Update ( int id, Product product )
         {
-            //TODO: Check arguments
             if (product == null)
                 throw new ArgumentNullException(nameof(product));
-            if (product.Id < 0)
+            if (id < 0)
                 throw new ArgumentOutOfRangeException(nameof(product), "Id must be > 0.");
 
             //Validate product
             ObjectValidator.Validate(product);
 
             //Get existing product
-            var existing = GetCore(product.Id);
+            var existing = GetCore(id);
+            if (existing == null)
+                throw new Exception("Game does not exist.");
 
-            return UpdateCore(existing, product);
+
+            return UpdateCore(id, product);
         }
 
         #region Protected Members
@@ -83,7 +85,7 @@ namespace Nile.Stores
 
         protected abstract void RemoveCore( int id );
 
-        protected abstract Product UpdateCore( Product existing, Product newItem );
+        protected abstract Product UpdateCore( int id, Product newItem );
 
         protected abstract Product AddCore( Product product );
         #endregion

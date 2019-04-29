@@ -3,6 +3,7 @@
  * Jakob Rodriguez
  */
 using System;
+using System.Configuration;
 using System.Windows.Forms;
 using Nile.Stores.Sql;
 
@@ -25,8 +26,8 @@ namespace Nile.Windows
 
             _gridProducts.AutoGenerateColumns = false;
 
-            //var connString = ConfigurationManager.ConnectionStrings["database"];
-            //_products = new SqlProductDatabase(connString.ConnectionString);
+            var connString = ConfigurationManager.ConnectionStrings["ProductDatabase"];
+            _database = new SqlProductDatabase(connString.ConnectionString);
 
             UpdateList();
         }
@@ -135,14 +136,14 @@ namespace Nile.Windows
                 return;
 
             //TODO: Handle errors
-            try
-            {
+            //try
+            //{
                 //Save product
-                _database.Update(child.Product);
-            } catch (Exception ex)
-            {
-                DisplayError(ex);
-            };
+                _database.Update(product.Id, child.Product);
+            //} catch (Exception ex)
+            //{
+            //    DisplayError(ex);
+            //};
 
             UpdateList();
         }
@@ -167,7 +168,7 @@ namespace Nile.Windows
             };
         }
 
-        private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+        private IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
         #endregion
 
         private void OnHelpAbout( object sender, EventArgs e )

@@ -54,10 +54,10 @@ namespace Nile.Stores
         /// <summary>Updates a product.</summary>
         /// <param name="product">The product to update.</param>
         /// <returns>The updated product.</returns>
-        protected override Product UpdateCore ( Product existing, Product product )
+        protected override Product UpdateCore ( int id, Product product )
         {
             //Replace 
-            existing = FindProduct(product.Id);
+            var existing = FindProduct(id);
             _products.Remove(existing);
             
             var newProduct = CopyProduct(product);
