@@ -118,20 +118,17 @@ namespace Nile.Stores.Sql
             using (var connection = GetConnection())
             {
                 connection.Open();
-
-                //var cmd = new SqlCommand("", connection);
+                
                 var cmd = connection.CreateCommand();
                 cmd.CommandText = "UpdateProduct";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
-                //Add parameter 1 - long way when you need control over parameter
-                var parameter = new SqlParameter("@Name", System.Data.SqlDbType.NVarChar);
-
+                
+                //var parameter = new SqlParameter("@Name", System.Data.SqlDbType.NVarChar);
+                cmd.Parameters.AddWithValue("@Id", id);
                 cmd.Parameters.AddWithValue("@Name", newItem.Name);
                 cmd.Parameters.AddWithValue("@Description", newItem.Description);
                 cmd.Parameters.AddWithValue("@Price", newItem.Price);
                 cmd.Parameters.AddWithValue("@IsDiscontinued", newItem.IsDiscontinued);
-                cmd.Parameters.AddWithValue("@Id", id);
 
                 //No results
                 cmd.ExecuteNonQuery();
