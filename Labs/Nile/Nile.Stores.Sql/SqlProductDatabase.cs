@@ -43,6 +43,7 @@ namespace Nile.Stores.Sql
                 var cmd = conn.CreateCommand();
                 cmd.CommandText = "GetProduct";
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
 
                 conn.Open();
                 var reader = cmd.ExecuteReader();
@@ -51,13 +52,13 @@ namespace Nile.Stores.Sql
                     var prodId = reader.GetInt32(0);
                     if (prodId == id)
                     {
-                        return new Product()
+                        return new Product() //something is wrong in here
                         {
                             Id = prodId,
                             Name = GetString(reader, "Name"),
                             Description = GetString(reader, "Description"),
                             Price = reader.GetFieldValue<decimal>(3),
-                            IsDiscontinued = Convert.ToBoolean(reader.GetValue(4))
+                            IsDiscontinued = Convert.ToBoolean(reader.GetOrdinal("IsDiscontinued"))
                         };
                     };
                 };

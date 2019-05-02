@@ -60,6 +60,9 @@ namespace GameManager
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var items = new List<ValidationResult>();
+            
+            if (Price > 1000000)
+                items.Add(new ValidationResult("Price too expensive.", new[] { nameof(Price) }));
 
             ////Name is required
             //if (String.IsNullOrEmpty(Name))

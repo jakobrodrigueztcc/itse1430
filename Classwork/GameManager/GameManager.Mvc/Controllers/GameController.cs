@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 using GameManager.Sql;
 
 namespace GameManager.Mvc.Controllers
@@ -18,7 +19,7 @@ namespace GameManager.Mvc.Controllers
             var games = db.GetAll();
 
             return View(games);
-            // return Json(games, JsonRequestBehavior.AllowGet);
+            //return Json(games, JsonRequestBehavior.AllowGet);
         }
 
         private static SqlGameDatabase GetDatabase()
@@ -33,6 +34,28 @@ namespace GameManager.Mvc.Controllers
             return View(new Game());
         }
 
+        [HttpPost]
+        public ActionResult Create(Game model)
+        {
+            if (ModelState.IsValid)
+            {
+                var db = GetDatabase();
+
+                try
+                {
+                    var game = db.Add(model);
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                };
+            };
+
+            return View(model);
+        }
+
         public ActionResult Edit(int id)
         {
             var db = GetDatabase();
@@ -43,46 +66,29 @@ namespace GameManager.Mvc.Controllers
             return View(game);
         }
 
-
-        [HttpPost]
-        public ActionResult Create(Game model)
-        {
-            var db = GetDatabase();
-
-            var game = db.Add(model);
-
-            return RedirectToAction("Index");
-        }
-
         [HttpPost]
         public ActionResult Edit(Game model)
         {
-            var db = GetDatabase();
-            var game = db.Get(model.Id);
+            if (ModelState.IsValid)
+            {
+                var db = GetDatabase();
 
-            //game.Name = model.Name;
-            //game.Description = model.Description;
-            //game.Completed = model.Completed;
-            //game.Owned = model.Owned;
-            //game.Price = model.Price;
+                try
+                {
+                    var game = db.Update(model.Id, model);
 
-            db.Update(model.Id, model);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                };
+            };
 
-            return RedirectToAction("Index");
+            return View(model);
         }
 
-        [HttpPost]
-        public ActionResult Delete(Game model)
-        {
-            var db = GetDatabase();
-            var game = db.Get(model.Id);
-
-            db.Delete(model.Id);
-
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult Delete (int id)
+        public ActionResult Delete(int id)
         {
             var db = GetDatabase();
             var game = db.Get(id);
@@ -90,6 +96,30 @@ namespace GameManager.Mvc.Controllers
                 return HttpNotFound();
 
             return View(game);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Game model)
+        {
+            var db = GetDatabase();
+
+            try
+            {
+                db.Delete(model.Id);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", e.Message);
+            };
+
+            return View(model);
+        }
+
+        public ActionResult Whatever(string name, decimal price)
+        {
+            return Redirect("http://www.google.com");
         }
     }
 }
